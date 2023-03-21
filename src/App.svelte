@@ -106,38 +106,44 @@ code
 				<button class="button is-primary" on:click="{fetchSummaries}" disabled={!apiKey}>Generate Summary and Article</button>
 			  </div>
 			</div>
+			<div>
+				{#if progress || summaryPoints.length > 0 || article}
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          {#if progress}
+            <h2 class="subtitle">{progress}</h2>
+            <progress class="progress is-primary" max="100"></progress>
+          {/if}
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          {#if summaryPoints.length > 0}
+            <h2 class="subtitle is-3">Summary Points:</h2>
+            <div class="content">
+              <Markdown source="{summaryPoints.join('\n\n- ')}" />
+            </div>
+          {/if}
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          {#if article}
+            <h2 class="subtitle is-3">Generated Article:</h2>
+            <div class="content">
+              <Markdown source="{article}" />
+            </div>
+          {/if}
+        </div>
+      </div>
+    </div>
+  </section>
+{/if}
+			</div>
 		  </div>
 		</div>
 	  </div>
-	  {#if progress}
-      <section class="section">
-        <div class="container">
-          <h2 class="subtitle">{progress}</h2>
-          <progress class="progress is-primary" max="100"></progress>
-        </div>
-      </section>
-    {/if}
-    {#if summaryPoints.length > 0}
-      <section class="section">
-        <div class="container">
-          <h2 class="subtitle is-3">Summary Points:</h2>
-          <div class="content">
-            <Markdown source="{summaryPoints.join('\n\n- ')}" />
-          </div>
-        </div>
-      </section>
-    {/if}
-    {#if article}
-      <section class="section">
-        <div class="container">
-          <h2 class="subtitle is-3">Generated Article:</h2>
-          <div class="content">
-            <Markdown source="{article}" />
-          </div>
-        </div>
-      </section>
-    {/if}
   </div>
 </main>
-
-	
